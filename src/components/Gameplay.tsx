@@ -6,6 +6,7 @@ import AlphabetCard from "./AlphabetCard";
 
 export function Gameplay() {
   const [text, setText] = useState<string>("");
+  const [showPenalizeFeedback, setShowPeanilizeFeedback] = useState<boolean>(false); 
 
   const {
     alphabet,
@@ -34,6 +35,10 @@ export function Gameplay() {
       nextAlphabet();
     } else {
       penalize();
+      setShowPeanilizeFeedback(true);
+      setTimeout(() => {
+        setShowPeanilizeFeedback(false);
+      }, 400)
     }
   };
 
@@ -60,7 +65,8 @@ export function Gameplay() {
         highScore={highScore}
         numberOfSuccess={numberOfSuccess}
       />
-      <h1>Time: {score.toFixed(1)}s</h1>
+      
+      <h1>Time: {score.toFixed(1)}s {showPenalizeFeedback && <span className="PenalizeFeedback">+0.5s</span>}</h1>
       <p>
         Best Time:{" "}
         {typeof highScore === "number" ? highScore.toFixed(1) : highScore}s

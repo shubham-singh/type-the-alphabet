@@ -38,6 +38,11 @@
   color: white;
 }
 
+.PenalizeFeedback {
+  color: red;
+  animation: slidein 3s linear 1s;
+}
+
 @media screen and (max-width: 768px) {
   .AlphabetCard {
     width: 90%;
