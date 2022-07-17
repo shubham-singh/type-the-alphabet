@@ -36,21 +36,28 @@ export default function useAlphabet() {
 
   const nextAlphabet = () => {
     let alphabetIndex = getRandomIntInclusive(0, 25);
-    
+
     while (usedAlphabet.includes(alphabets[alphabetIndex])) {
       if (usedAlphabet.length >= alphabets.length) {
         break;
       }
       alphabetIndex = getRandomIntInclusive(0, 25);
     }
-    
+
     setAlphabet(alphabets[alphabetIndex]);
     setUsedAlphabet((history) => history.concat(alphabets[alphabetIndex]));
+  };
+
+  const reset = () => {
+    const index = getRandomIntInclusive(0, 25);
+    setAlphabet(alphabets[index]);
+    setUsedAlphabet([alphabets[index]]);
   };
 
   return {
     alphabet,
     nextAlphabet,
     numberOfSuccess: usedAlphabet.length,
+    reset,
   };
 }
