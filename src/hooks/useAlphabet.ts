@@ -56,8 +56,8 @@ export default function useAlphabet() {
 
   return {
     alphabet,
+    numberOfSuccess: usedAlphabet.length - 1,
     nextAlphabet,
-    numberOfSuccess: usedAlphabet.length,
     reset,
   };
 }
