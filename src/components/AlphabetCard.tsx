@@ -15,10 +15,10 @@ export default function AlphabetCard({
       highScore: number
     ) {
       if (numberOfSuccess >= 20 && score === highScore) {
-        return <h1>Woah! This is your best time</h1>;
+        return <h1>Success! 🎉</h1>;
       }
       if (numberOfSuccess >= 20) {
-        return <h1>Success!</h1>;
+        return <h1 style={{color: 'red'}}>Failed to beat high score 😔</h1>;
       }
       return null;
     }
