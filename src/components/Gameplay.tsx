@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import useAlphabet from "./hooks/useAlphabet";
-import useLocalStorage from "./hooks/useLocalStorage";
-import useScore from "./hooks/useScore";
+import useAlphabet from "../hooks/useAlphabet";
+import useLocalStorage from "../hooks/useLocalStorage";
+import useScore from "../hooks/useScore";
+import AlphabetCard from "./AlphabetCard";
 
 export function Gameplay() {
   const [text, setText] = useState<string>("");
@@ -20,7 +21,10 @@ export function Gameplay() {
   const onUserInput = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     setText(e.target.value);
 
-    if (e.nativeEvent.inputType === 'deleteContentBackward' ||  numberOfSuccess >= 20) {
+    if (
+      e.nativeEvent.inputType === "deleteContentBackward" ||
+      numberOfSuccess >= 20
+    ) {
       return;
     }
     if (text.length === 0) {
@@ -39,20 +43,6 @@ export function Gameplay() {
     setText("");
   };
 
-  function winningMessage(
-    numberOfSuccess: number,
-    score: number,
-    highScore: number
-  ) {
-    if (numberOfSuccess >= 20 && score === highScore) {
-      return <h1>Woah! This is your best time</h1>;
-    }
-    if (numberOfSuccess >= 20) {
-      return <h1>Success!</h1>;
-    }
-    return null;
-  }
-
   useEffect(() => {
     if (numberOfSuccess === 20) {
       stop();
@@ -64,21 +54,26 @@ export function Gameplay() {
 
   return (
     <>
-      {winningMessage(numberOfSuccess, score, highScore)}
-      {numberOfSuccess < 20 && <div>{alphabet}</div>}
-      <p>Time: {score.toFixed(1)}s</p>
-      <br />
+      <AlphabetCard
+        alphabet={alphabet}
+        score={score}
+        highScore={highScore}
+        numberOfSuccess={numberOfSuccess}
+      />
+      <h1>Time: {score.toFixed(1)}s</h1>
       <p>
         Best Time:{" "}
         {typeof highScore === "number" ? highScore.toFixed(1) : highScore}s
       </p>
-      <input
-        autoFocus
-        placeholder="enter here"
-        value={text}
-        onChange={onUserInput}
-      />
-      <button onClick={resetGame}>Reset</button>
+      <div className="input">
+        <input
+          autoFocus
+          placeholder="Type here"
+          value={text}
+          onChange={onUserInput}
+        />
+        <button onClick={resetGame}>Reset</button>
+      </div>
     </>
   );
 }
