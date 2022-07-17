@@ -40,7 +40,7 @@
 
 .PenalizeFeedback {
   color: red;
-  animation: slidein 3s linear 1s;
+  font-size: smaller;
 }
 
 @media screen and (max-width: 768px) {
